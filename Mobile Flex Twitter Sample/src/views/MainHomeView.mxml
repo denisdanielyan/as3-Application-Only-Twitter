@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Tweets"
+		initialize="init()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:ArrayCollection id="tweets" />
+	</fx:Declarations>
+	
+	<s:List id="list" top="0" left="0" right="0" bottom="0" dataProvider="{tweets}">
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer>
+					<s:Image source="{data.user.profile_image_url}" left="0" verticalCenter="0" width="60" height="60"/>
+					<s:Label text="{data.text}" left="65" right="5" top="5" bottom="5"/>
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+		
+	</s:List>
+	<s:BusyIndicator id="busy" verticalCenter="0" horizontalCenter="0" width="60" height="60" />
+	<fx:Script>
+		<![CDATA[
+			import de.danielyan.twitterAppOnly.TwitterSocket;
+			import de.danielyan.twitterAppOnly.TwitterSocketEvent;
+
+			private var _twitter:TwitterSocket;
+			public function init():void
+			{
+				// Read more about Application-Only authentication here:
+				// https://dev.twitter.com/docs/auth/oauth#v1-1
+				// and here:
+				// https://dev.twitter.com/docs/auth/application-only-auth
+				_twitter = new TwitterSocket('YOUR CONSUMER KEY', 'YOUR CONSUMER SECRET');
+				_twitter.addEventListener(TwitterSocket.EVENT_TWITTER_READY, onTwitterReady);
+				_twitter.addEventListener(TwitterSocketEvent.EVENT_TWITTER_DATA, onTwitterData);
+			}
+			
+			public function onTwitterReady(event:Event):void
+			{
+				_twitter.request("/1.1/statuses/user_timeline.json?count=100&screen_name=twitter");
+			}
+			
+			public function onTwitterData(event:TwitterSocketEvent):void
+			{
+				busy.visible=false;
+				tweets = new ArrayCollection(event.response as Array);
+				
+			}
+
+		]]>
+	</fx:Script>
+</s:View>
