@@ -13,10 +13,10 @@ This ActionScript 3 Module is compatible with Flex 4 and AIR Mobile (iOS and And
 1. Create a Twiter app here: https://dev.twitter.com/apps
 2. Under "OAuth Tool" you find the "consumer key" and the "consumer secret", they havea to go into the TwitterSocket constructor
 3. Register for the two Event listeners EVENT_TWITTER_READY and EVENT_TWITTER_RESPONSE
-4. Send a request once EVENT_TWITTER_READY has been fired
+4. Send requests once EVENT_TWITTER_READY has been fired
 
 # Credits: #
-This Module uses As3Crypto (https://code.google.com/p/as3crypto/) to create a secure socket connection on Mobile devices.
+This Module uses as3Crypto (https://code.google.com/p/as3crypto/) to create secure socket connections on Mobile devices.
 
 # Further Information: #
 Read more about the Twitter Application-Only authentication here:
