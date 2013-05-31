@@ -133,6 +133,10 @@ package de.danielyan.twitterAppOnly
 				_output = "";
 				return;
 			}
+			if (output.indexOf("HTTP/1.1 404") != -1)
+			{
+				throw(Error("TwitterSocket: 404 Page not found"));
+			}
 
 			if (_isResponseValid)
 			{

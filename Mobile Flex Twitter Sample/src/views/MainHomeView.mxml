@@ -32,17 +32,23 @@
 				// and here:
 				// https://dev.twitter.com/docs/auth/application-only-auth
 				_twitter = new TwitterSocket('YOUR CONSUMER KEY', 'YOUR CONSUMER SECRET');
+				
+				// twitter socket uses two events: 
+				// * The Ready event, when an app Token has been received
 				_twitter.addEventListener(TwitterSocket.EVENT_TWITTER_READY, onTwitterReady);
-				_twitter.addEventListener(TwitterSocketEvent.EVENT_TWITTER_DATA, onTwitterData);
+				// * The Twitter Data event, when the twitter Request has finished
+				_twitter.addEventListener(TwitterSocket.EVENT_TWITTER_RESPONSE, onTwitterData);
 			}
 			
 			public function onTwitterReady(event:Event):void
 			{
+				// place your twiter requests here
 				_twitter.request("/1.1/statuses/user_timeline.json?count=100&screen_name=twitter");
 			}
 			
 			public function onTwitterData(event:TwitterSocketEvent):void
 			{
+				// this message is 
 				busy.visible=false;
 				tweets = new ArrayCollection(event.response as Array);
 				

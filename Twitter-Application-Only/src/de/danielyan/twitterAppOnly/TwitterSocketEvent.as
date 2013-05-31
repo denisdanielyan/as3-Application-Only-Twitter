@@ -5,11 +5,10 @@ package de.danielyan.twitterAppOnly
 	public class TwitterSocketEvent extends Event
 	{
 		public var response:Object;
-		public static var EVENT_TWITTER_DATA:String="EVENT_TWITTER_DATA";
 		
 		public function TwitterSocketEvent()
 		{
-			super(EVENT_TWITTER_DATA);
+			super(TwitterSocket.EVENT_TWITTER_RESPONSE);
 		}
 		
 	}
