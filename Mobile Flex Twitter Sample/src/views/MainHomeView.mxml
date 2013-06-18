@@ -7,6 +7,12 @@
 		<s:ArrayCollection id="tweets" />
 	</fx:Declarations>
 	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="busy"/>
+		<s:State name="networkError"/>
+	</s:states>
+	
 	<s:List id="list" top="0" left="0" right="0" bottom="0" dataProvider="{tweets}">
 		<s:itemRenderer>
 			<fx:Component>
@@ -18,7 +24,8 @@
 		</s:itemRenderer>
 		
 	</s:List>
-	<s:BusyIndicator id="busy" verticalCenter="0" horizontalCenter="0" width="60" height="60" />
+	<s:BusyIndicator id="busy" verticalCenter="0" horizontalCenter="0" width="60" height="60" includeIn="busy"/>
+	<s:Label id="networkError" verticalCenter="0" horizontalCenter="0" text="Network Error Occured" includeIn="networkError"/>
 	<fx:Script>
 		<![CDATA[
 			import de.danielyan.twitterAppOnly.TwitterSocket;
@@ -38,6 +45,13 @@
 				_twitter.addEventListener(TwitterSocket.EVENT_TWITTER_READY, onTwitterReady);
 				// * The Twitter Data event, when the twitter Request has finished
 				_twitter.addEventListener(TwitterSocket.EVENT_TWITTER_RESPONSE, onTwitterData);
+				// * Catch IO Errors! This happens when no network is available
+				_twitter.addEventListener(IOErrorEvent.IO_ERROR,onError);
+				currentState="busy";
+			}
+			public function onError(event:Event):void
+			{
+				currentState="networkError";
 			}
 			
 			public function onTwitterReady(event:Event):void
@@ -49,7 +63,7 @@
 			public function onTwitterData(event:TwitterSocketEvent):void
 			{
 				// this message is 
-				busy.visible=false;
+				currentState="normal";
 				tweets = new ArrayCollection(event.response as Array);
 				
 			}
