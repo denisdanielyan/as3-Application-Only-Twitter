@@ -3,6 +3,7 @@
 	<name>Mobile Flex Twitter Sample</name>
 	<comment></comment>
 	<projects>
+		<project>Twitter-Application-Only</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
