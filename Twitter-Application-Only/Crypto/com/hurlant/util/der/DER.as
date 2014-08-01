@@ -119,6 +119,16 @@ package com.hurlant.util.der
 					der.readBytes(b,0,len);
 					b.position=0;
 					return new ObjectIdentifier(type, len, b);
+					// support for type 12
+				case 0x0C: // V_ASN1_UTF8STRING
+					ps = new PrintableString(type, len);
+					ps.setString(der.readMultiByte(len, "utf-8"));
+					return ps;
+					// support for type 22
+				case 0x16: // V_ASN1_IA5STRING
+					ps = new PrintableString(type, len);
+					ps.setString(der.readMultiByte(len, "x-IA5"));
+					return ps;					
 				default:
 					trace("I DONT KNOW HOW TO HANDLE DER stuff of TYPE "+type);
 					// fall through

@@ -18,7 +18,6 @@
  */
 package com.hurlant.crypto.hash
 {
-	import flash.utils.ByteArray;
 
 	public class SHA256 extends SHABase implements IHash
 	{
@@ -31,7 +30,7 @@ package com.hurlant.crypto.hash
 		0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
 		0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
 		0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2];
-		protected var h:Array = [
+		protected var _h:Array = [
 		0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
 		];
 		
@@ -49,14 +48,14 @@ package com.hurlant.crypto.hash
 			x[((len + 64 >> 9) << 4) + 15] = len;
 		
 			var w:Array = [];
-			var a:uint = h[0];
-			var b:uint = h[1];
-			var c:uint = h[2];
-			var d:uint = h[3];
-			var e:uint = h[4];
-			var f:uint = h[5];
-			var g:uint = h[6];
-			var h:uint = h[7];
+			var a:uint = _h[0];
+			var b:uint = _h[1];
+			var c:uint = _h[2];
+			var d:uint = _h[3];
+			var e:uint = _h[4];
+			var f:uint = _h[5];
+			var g:uint = _h[6];
+			var h:uint = _h[7];
 			
 			for (var i:uint=0; i<x.length; i+=16) {
 				var olda:uint = a;

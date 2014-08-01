@@ -78,7 +78,7 @@ package de.danielyan.twitterAppOnly
 					"Host: api.twitter.com\n"+
 					"User-Agent: AS3 Twitter Lib v1.0\n" +
 					"Authorization: Bearer " + _accessToken + "\n";
-					"Accept-Encoding:\r\n";
+					"Accept-Encoding: NONE\r\n";
 				_socket.writeUTFBytes(requestData);			
 				_socket.writeUTFBytes("\r\n");			
 				_socket.flush();
