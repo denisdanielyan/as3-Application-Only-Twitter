@@ -9,6 +9,8 @@ This Module handles twitter requests that need the Application-Only security lev
 
 This ActionScript 3 Module is compatible with Flex 4 and AIR Mobile (iOS and Android) but also runs without.
 
+This module is designed to be run as a mobile / desktop app. AFAIK it does not run as a Website because it would require an entry in a nonexistent crossdomain-policy file that whould have to reside on the twitter server.
+
 # Usage #
 1. Create a Twiter app here: https://dev.twitter.com/apps
 2. Under "OAuth Tool" you find the "consumer key" and the "consumer secret", they havea to go into the TwitterSocket constructor
